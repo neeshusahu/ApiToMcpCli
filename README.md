@@ -1,6 +1,6 @@
 # ApiToMcpCli (`mcpgen`)
 
-A .NET command-line tool that reads an **OpenAPI 3 YAML spec** and turns it into a **`registry.json`**. A generic MCP server (ApiToMcpServer) loads that file and uses it to call the API on behalf of an AI agent.
+A .NET command-line tool that reads an **OpenAPI YAML spec** and turns it into a **`registry.json`**. A generic MCP server (ApiToMcpServer) loads that file and uses it to call the API on behalf of an AI agent.
 
 You don't write a separate MCP tool for each endpoint. The CLI describes each API operation once as data: its path, method, parameters, body, pagination and risk level. The server then exposes a single generic tool that can call any operation in the registry by its `operationId`.
 
