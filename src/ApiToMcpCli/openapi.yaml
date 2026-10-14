@@ -1,0 +1,138 @@
+openapi: 3.0.3
+info:
+  title: User Management API
+  version: 1.0.0
+servers:
+  - url: http://localhost:5080
+
+paths:
+  /users:
+    get:
+      operationId: listUsers
+      summary: List users. Use nextCursor to get the next page.
+      parameters:
+        - { name: cursor, in: query, schema: { type: string } }
+        - { name: limit, in: query, schema: { type: integer, default: 20 } }
+      responses:
+        '200':
+          description: A page of users
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UserList' }
+    post:
+      operationId: createUser
+      summary: Create a user
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UserInput' }
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+
+  /users/{id}:
+    get:
+      operationId: getUser
+      summary: Get a user
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: The user
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+    put:
+      operationId: updateUser
+      summary: Update a user
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UserInput' }
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+    delete:
+      operationId: deleteUser
+      summary: Delete a user. Cannot be undone.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '204': { description: Deleted }
+
+  /organizations:
+    get:
+      operationId: listOrganizations
+      summary: List organizations. Use nextCursor to get the next page.
+      parameters:
+        - { name: cursor, in: query, schema: { type: string } }
+        - { name: limit, in: query, schema: { type: integer, default: 20 } }
+      responses:
+        '200':
+          description: A page of organizations
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/OrganizationList' }
+
+  /organizations/{id}:
+    get:
+      operationId: getOrganization
+      summary: Get an organization
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: The organization
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Organization' }
+    delete:
+      operationId: deleteOrganization
+      summary: Delete an organization and all its memberships. Cannot be undone.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '204': { description: Deleted }
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        email: { type: string }
+
+    UserInput:
+      type: object
+      properties:
+        name: { type: string }
+        email: { type: string }
+
+    UserList:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/User' } }
+        nextCursor: { type: string, nullable: true }
+        hasNext: { type: boolean }
+
+    Organization:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+
+    OrganizationList:
+      type: object
+      properties:
+        data: { type: array, items: { $ref: '#/components/schemas/Organization' } }
+        nextCursor: { type: string, nullable: true }
+        hasNext: { type: boolean }

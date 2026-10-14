@@ -1,0 +1,26 @@
+# Normalize line endings; let Git detect text files
+* text=auto
+
+# Source and config: LF in the repo, LF on checkout
+*.cs      text eol=lf diff=csharp
+*.csproj  text eol=lf
+*.props   text eol=lf
+*.targets text eol=lf
+*.json    text eol=lf
+*.yaml    text eol=lf
+*.yml     text eol=lf
+*.md      text eol=lf diff=markdown
+*.sh      text eol=lf
+
+# Visual Studio solution files need CRLF
+*.sln     text eol=crlf
+
+# Binary files
+*.png  binary
+*.jpg  binary
+*.gif  binary
+*.ico  binary
+*.dll  binary
+*.exe  binary
+*.pdb  binary
+*.nupkg binary

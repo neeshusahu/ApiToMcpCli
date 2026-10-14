@@ -1,0 +1,158 @@
+{
+  "baseUrl": "http://localhost:5080",
+  "operations": {
+    "listUsers": {
+      "name": "listUsers",
+      "resource": "users",
+      "summary": "List users. Use nextCursor to get the next page.",
+      "method": {
+        "method": "GET"
+      },
+      "path": "/users",
+      "risk": "read",
+      "pathParams": [],
+      "pagination": {
+        "cursorParam": "cursor",
+        "limitParam": "limit",
+        "defaultLimit": 20,
+        "itemsPath": "data",
+        "nextCursorPath": "nextCursor",
+        "hasMorePath": "hasNext"
+      }
+    },
+    "createUser": {
+      "name": "createUser",
+      "resource": "users",
+      "summary": "Create a user",
+      "method": {
+        "method": "POST"
+      },
+      "path": "/users",
+      "risk": "write",
+      "pathParams": [],
+      "body": {
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "getUser": {
+      "name": "getUser",
+      "resource": "users",
+      "summary": "Get a user",
+      "method": {
+        "method": "GET"
+      },
+      "path": "/users/{id}",
+      "risk": "read",
+      "pathParams": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "updateUser": {
+      "name": "updateUser",
+      "resource": "users",
+      "summary": "Update a user",
+      "method": {
+        "method": "PUT"
+      },
+      "path": "/users/{id}",
+      "risk": "write",
+      "pathParams": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ],
+      "body": {
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "deleteUser": {
+      "name": "deleteUser",
+      "resource": "users",
+      "summary": "Delete a user. Cannot be undone.",
+      "method": {
+        "method": "DELETE"
+      },
+      "path": "/users/{id}",
+      "risk": "destructive",
+      "pathParams": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "listOrganizations": {
+      "name": "listOrganizations",
+      "resource": "organizations",
+      "summary": "List organizations. Use nextCursor to get the next page.",
+      "method": {
+        "method": "GET"
+      },
+      "path": "/organizations",
+      "risk": "read",
+      "pathParams": [],
+      "pagination": {
+        "cursorParam": "cursor",
+        "limitParam": "limit",
+        "defaultLimit": 20,
+        "itemsPath": "data",
+        "nextCursorPath": "nextCursor",
+        "hasMorePath": "hasNext"
+      }
+    },
+    "getOrganization": {
+      "name": "getOrganization",
+      "resource": "organizations",
+      "summary": "Get an organization",
+      "method": {
+        "method": "GET"
+      },
+      "path": "/organizations/{id}",
+      "risk": "read",
+      "pathParams": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "deleteOrganization": {
+      "name": "deleteOrganization",
+      "resource": "organizations",
+      "summary": "Delete an organization and all its memberships. Cannot be undone.",
+      "method": {
+        "method": "DELETE"
+      },
+      "path": "/organizations/{id}",
+      "risk": "destructive",
+      "pathParams": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    }
+  }
+}
